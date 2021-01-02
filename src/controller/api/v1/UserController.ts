@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import { serverErrorResponse, responseMessage, clientErrorResponse, baseSuccessResponse } from '@Providers';
+import { Request, Response } from 'express';
+import { responseMessage, clientErrorResponse, baseSuccessResponse } from '@Providers';
 import { isEmpty } from '@Helper';
 import { UserProfiles, Users, UserNameChangeLog } from '@Models';
 import moment from 'moment';

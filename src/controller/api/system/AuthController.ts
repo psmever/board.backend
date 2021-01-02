@@ -13,11 +13,7 @@ import { sequelize } from '@src/instances/Sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import MailSender from '@src/common/helper/MailSender';
 import bcrypt from 'bcrypt';
-
-import Users from '@src/models/Users';
-import UserProfiles from '@src/models/UserProfiles';
-import UserEmailAuth from '@src/models/UserEmailAuth';
-import UserType from '@src/models/UserType';
+import { Users, UserProfiles, UserEmailAuth, UserType } from '@Models';
 import { generateLoginToken, generateTokenRefresh } from '@src/common/helper/Tokens';
 import GlobalConfig from '@GlobalConfig';
 
