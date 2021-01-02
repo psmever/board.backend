@@ -1,8 +1,8 @@
 doctype html
 html
   head
-    title= globalConfig.APP_NAME
+    title= process.env.APP_NAME
     link(rel='stylesheet', href='/assets/css/style.css')
   body
-    H1 Welcome to #{globalConfig.APP_NAME}
+    H1 Welcome to #{process.env.APP_NAME}
     block content
