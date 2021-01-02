@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { login, register, authenticateError, usercheck, tokenRefresh } from '@controller/api/system/AuthController';
+import { login, register, authenticateError, usercheck, tokenRefresh } from '@Controller/api/system/AuthController';
 import passport from 'passport';
 
 export const AuthRouter = Router();

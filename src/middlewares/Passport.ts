@@ -1,9 +1,10 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { Logger, globalConfig } from '@common';
+import { Logger, isEmpty } from '@Helper';
+import GlobalConfig from '@GlobalConfig';
 import { Op } from 'sequelize';
-import { AccessTokens, Users } from '@models';
+import { AccessTokens, Users } from '@Models';
 import moment from 'moment';
-const serverSecret = globalConfig.server_secret ? globalConfig.server_secret : '';
+const serverSecret = GlobalConfig.server_secret ? GlobalConfig.server_secret : '';
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: serverSecret,
@@ -66,10 +67,15 @@ const Passport = async (
                 nest: true,
             })
                 .then(user => {
-                    if (user) {
-                        return done(null, user);
+                    if (isEmpty(user)) {
+                        return done(null, false);
                     }
-                    return done(null, false);
+
+                    if (user && user.active !== 'Y') {
+                        return done(null, false);
+                    }
+
+                    return done(null, user);
                 })
                 .catch(err => Logger.error(`error`, err));
         })
