@@ -2,7 +2,8 @@ import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 // import cors from 'cors';
 import passport from 'passport';
-import { Logger, isEmpty, globalConfig } from '@common';
+import { Logger, isEmpty } from '@Helper';
+import GlobalConfig from '@GlobalConfig';
 import Passport from '@src/middlewares/Passport';
 import path from 'path';
 
@@ -41,35 +42,35 @@ interface CheckEnvironmentResult {
 
 // FIXME: 2020-12-27 17:49  나중에 파일로 따로 빼자.
 export const checkEnvironment = (): CheckEnvironmentResult => {
-    if (isEmpty(globalConfig.bcrypt_saltrounds)) {
+    if (isEmpty(GlobalConfig.bcrypt_saltrounds)) {
         return {
             state: false,
             message: `not found Environment bcrypt_saltrounds `,
         };
     }
 
-    if (isEmpty(globalConfig.server_secret)) {
+    if (isEmpty(GlobalConfig.server_secret)) {
         return {
             state: false,
             message: `not found Environment server_secret `,
         };
     }
 
-    if (isEmpty(globalConfig.encryption_key)) {
+    if (isEmpty(GlobalConfig.encryption_key)) {
         return {
             state: false,
             message: `not found Environment encryption_key `,
         };
     }
 
-    if (isEmpty(globalConfig.refresh_token_expirein)) {
+    if (isEmpty(GlobalConfig.refresh_token_expirein)) {
         return {
             state: false,
             message: `not found Environment refresh_token_expirein `,
         };
     }
 
-    if (isEmpty(globalConfig.access_token_expirein)) {
+    if (isEmpty(GlobalConfig.access_token_expirein)) {
         return {
             state: false,
             message: `not found Environment access_token_expirein `,
@@ -104,9 +105,9 @@ export function initServer(app: Application): void {
 
 // 서버 시작.
 export function startServer(app: Application): void {
-    const port = globalConfig.port || 3000;
-    const appEnv = globalConfig.app_env || `NOT FOUND APP ENV`;
-    const appName = globalConfig.app_name || `NOT FOUND APP NAME`;
+    const port = GlobalConfig.port || 3000;
+    const appEnv = GlobalConfig.app_env || `NOT FOUND APP ENV`;
+    const appName = GlobalConfig.app_name || `NOT FOUND APP NAME`;
 
     app.listen(port, () => Logger.info(`\nExpress :: ${appName} ${appEnv} :: running on port ${port}\n`, null, true));
 }

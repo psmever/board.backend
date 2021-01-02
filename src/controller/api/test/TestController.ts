@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
-import { GenerateToken, baseSuccessResponse, globalConfig } from '@common';
+import { GenerateToken } from '@Helper';
+import { baseSuccessResponse } from '@Providers';
 import { v4 as uuidv4 } from 'uuid';
 import jsonwebtoken from 'jsonwebtoken';
+import GlobalConfig from '@GlobalConfig';
 
-const serverSecret = globalConfig.server_secret ? globalConfig.server_secret : '';
+const serverSecret = GlobalConfig.server_secret ? GlobalConfig.server_secret : '';
 
 // 기본 테스트.
 export const Default = async (req: Request, res: Response): Promise<void> => {

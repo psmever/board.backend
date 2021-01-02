@@ -1,13 +1,14 @@
 import { Sequelize } from 'sequelize';
-import { globalConfig, Logger } from '@common';
+import { Logger } from '@Helper';
+import GlobalConfig from '@GlobalConfig';
 
 const config = {
-    username: globalConfig.mysql_username ? globalConfig.mysql_username : '',
-    password: globalConfig.mysql_password ? globalConfig.mysql_password : '',
-    database: globalConfig.mysql_database ? globalConfig.mysql_database : '',
-    host: globalConfig.mysql_host ? globalConfig.mysql_host : 'localhost',
+    username: GlobalConfig.mysql_username ? GlobalConfig.mysql_username : '',
+    password: GlobalConfig.mysql_password ? GlobalConfig.mysql_password : '',
+    database: GlobalConfig.mysql_database ? GlobalConfig.mysql_database : '',
+    host: GlobalConfig.mysql_host ? GlobalConfig.mysql_host : 'localhost',
     dialect: 'mariadb',
-    port: globalConfig.mysql_port ? Number(globalConfig.mysql_port) : 3306,
+    port: GlobalConfig.mysql_port ? Number(GlobalConfig.mysql_port) : 3306,
 };
 
 /**

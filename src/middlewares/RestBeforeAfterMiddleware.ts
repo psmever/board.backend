@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { isEmpty } from '@common';
-import { clientErrorResponse } from '@common';
+import { isEmpty } from '@Helper';
+import { clientErrorResponse } from '@Providers';
 import { responseMessage } from '@src/common/providers/ResponseMessage';
 
 export const RestBeforeAfterMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

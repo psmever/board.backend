@@ -39,6 +39,7 @@ const responseMessage = {
             fail_refresh_token_revoked: '사용할수 없는 토큰정보 입니다. 다시 로그인해 주세요.',
             fail_refresh_token_access_token: '토큰 정보 조회를 할수 없습니다.',
             fail_refresh_token_user_id: '정상 적인 사용자만 진행 할수 있습니다.',
+            login_fail_user_active: '로그인 할수 없는 사용자 입니다.',
         },
         success: {
             register: '회원 가입이 완료 되었습니다.',

@@ -26,9 +26,12 @@ module.exports = {
         alias: {
             '@src': path.resolve(__dirname, '/src'),
             '@src/*': path.resolve(__dirname, '/src/*'),
-            '@common': path.resolve(__dirname, '/src/common'),
-            '@models': path.resolve(__dirname, '/src/models'),
-            '@controller': path.resolve(__dirname, '/src/controller'),
+            '@Helper': path.resolve(__dirname, 'src/common/helper'),
+            '@GlobalConfig': path.resolve(__dirname, 'src/common/config/GlobalConfig'),
+            '@Providers': path.resolve(__dirname, 'src/common/providers'),
+            '@Common': path.resolve(__dirname, '/src/common'),
+            '@Models': path.resolve(__dirname, '/src/models'),
+            '@Controller': path.resolve(__dirname, '/src/controller'),
         }
     },
     module: {

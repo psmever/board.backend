@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import { isEmpty, globalConfig } from '@common';
+import { isEmpty } from '@Helper';
+import GlobalConfig from '@GlobalConfig';
 import UserEmailAuth from '@src/models/UserEmailAuth';
 import Users from '@src/models/Users';
 
 // 기본 서버 상태 체크.
 export const index = async (req: Request, res: Response): Promise<void> => {
-    res.render('index', { title: `${globalConfig.app_name}`, env: globalConfig.app_env });
+    res.render('index', { title: `${GlobalConfig.app_name}`, env: GlobalConfig.app_env });
 };
 
 interface CheckResult {

@@ -1,15 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
+import { Logger, isEmpty } from '@Helper';
 import {
-    Logger,
-    isEmpty,
     clientErrorResponse,
     baseSuccessResponse,
     serverErrorResponse,
     tokenResponse,
     authenticateErrorResponse,
     onlyDataSuccessResponse,
-    globalConfig,
-} from '@common';
+} from '@Providers';
 import { responseMessage } from '@src/common/providers/ResponseMessage';
 import { sequelize } from '@src/instances/Sequelize';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,8 +19,9 @@ import UserProfiles from '@src/models/UserProfiles';
 import UserEmailAuth from '@src/models/UserEmailAuth';
 import UserType from '@src/models/UserType';
 import { generateLoginToken, generateTokenRefresh } from '@src/common/helper/Tokens';
+import GlobalConfig from '@GlobalConfig';
 
-const serverSecret = globalConfig.server_secret ? globalConfig.server_secret : '';
+const serverSecret = GlobalConfig.server_secret ? GlobalConfig.server_secret : '';
 
 export const authenticateError = async (req: Request, res: Response): Promise<void> => {
     authenticateErrorResponse(res);
@@ -94,6 +93,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const { user_id, user_uuid, user_level, user_email, user_password, user_name, active, profile_active } = exitsUser;
+
+    if (active !== 'Y') {
+        clientErrorResponse(res, {
+            message: responseMessage.default.check.login_fail_user_active,
+        });
+        return;
+    }
 
     if (
         isEmpty(user_id) ||
@@ -207,7 +213,7 @@ export const register = async (req: Request, res: Response, next: NextFunction):
                 user_uuid: newUserUUID,
                 user_email: register_email,
                 user_name: register_username,
-                user_password: bcrypt.hashSync(register_password, Number(globalConfig.bcrypt_saltrounds)),
+                user_password: bcrypt.hashSync(register_password, Number(GlobalConfig.bcrypt_saltrounds)),
                 user_level: 'A30010',
                 active: 'N',
                 profile_active: 'N',
@@ -239,7 +245,7 @@ export const register = async (req: Request, res: Response, next: NextFunction):
             { transaction }
         );
 
-        if (globalConfig.app_env === 'production') {
+        if (GlobalConfig.app_env === 'production') {
             MailSender.SendEmailAuth({
                 ToEmail: register_email,
                 EmailAuthCode: emailAuthCode,

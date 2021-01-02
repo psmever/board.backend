@@ -1,11 +1,12 @@
-import { Logger, GenerateToken, Encrypt, Decrypt, globalConfig } from '@common';
+import { Logger, GenerateToken, Encrypt, Decrypt } from '@Helper';
+import GlobalConfig from '@GlobalConfig';
 import { sequelize } from '@src/instances/Sequelize';
 import moment from 'moment';
 import jsonwebtoken from 'jsonwebtoken';
-import { AccessTokens, RefreshTokens } from '@models';
+import { AccessTokens, RefreshTokens } from '@Models';
 import { responseMessage } from '@src/common/providers/ResponseMessage';
 
-const serverSecret = globalConfig.server_secret ? globalConfig.server_secret : '';
+const serverSecret = GlobalConfig.server_secret ? GlobalConfig.server_secret : '';
 
 // 디비에서 사용자 토큰 정보 조회.
 const getUserToken = async ({
@@ -61,7 +62,7 @@ const insertRefreshToken = async ({ id, access_token_id }: { id: string; access_
                 access_token_id: access_token_id,
                 revoked: 'N',
                 expiresAt: moment()
-                    .add(globalConfig.refresh_token_expirein, 'hours')
+                    .add(GlobalConfig.refresh_token_expirein, 'hours')
                     .format('YYYY-MM-DD HH:mm:ss'),
             },
             { transaction }
@@ -101,7 +102,7 @@ const insertAccssToken = async ({ id, user_id }: { id: string; user_id: number }
                 user_id: user_id,
                 revoked: 'N',
                 expiresAt: moment()
-                    .add(globalConfig.access_token_expirein, 'hours')
+                    .add(GlobalConfig.access_token_expirein, 'hours')
                     .format('YYYY-MM-DD HH:mm:ss'),
             },
 
@@ -177,7 +178,7 @@ const generateAccessToken = ({
         },
         serverSecret,
         {
-            expiresIn: 3600 * Number(globalConfig.access_token_expirein),
+            expiresIn: 3600 * Number(GlobalConfig.access_token_expirein),
         }
     );
 };

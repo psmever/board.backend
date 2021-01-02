@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import * as startup from './startup';
-import { Logger } from '@common';
+import { Logger } from '@Helper';
 
 const checkResult = startup.checkEnvironment();
 

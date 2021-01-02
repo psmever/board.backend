@@ -1,15 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import {
-    noCotentResponse,
-    baseNoticeResponse,
-    baseAppversionResponse,
-    baseSuccessResponse,
-    DeepMerge,
-    globalConfig,
-} from '@common';
+import GlobalConfig from '@GlobalConfig';
+import { DeepMerge } from '@Helper';
+import { noCotentResponse, baseNoticeResponse, baseAppversionResponse, baseSuccessResponse } from '@Providers';
 import * as fs from 'fs';
-import Codes from '@src/models/Codes';
-import Users from '@src/models/Users';
+import { Codes, Users } from '@Models';
 import { sequelize } from '@src/instances/Sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
@@ -116,7 +110,7 @@ export const defaultUser = async (req: Request, res: Response): Promise<void> =>
                     {
                         user_uuid: uuidv4(),
                         user_name: userJson.user_name,
-                        user_password: bcrypt.hashSync(userJson.user_password, Number(globalConfig.bcrypt_saltrounds)),
+                        user_password: bcrypt.hashSync(userJson.user_password, Number(GlobalConfig.bcrypt_saltrounds)),
                         user_email: userJson.user_email,
                         user_level: userJson.user_level,
                         active: 'Y',

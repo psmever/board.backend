@@ -5,7 +5,7 @@ import {
     appVersionCheck,
     baseData,
     defaultUser,
-} from '@controller/api/system/SystemController';
+} from '@Controller/api/system/SystemController';
 
 export const SystemsRouter = Router();
 

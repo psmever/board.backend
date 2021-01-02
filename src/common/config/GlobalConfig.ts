@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const globalConfig = {
+export default {
     node_env: process.env.NODE_ENV,
     app_name: process.env.APP_NAME,
     app_env: process.env.APP_ENV,
@@ -21,5 +21,3 @@ const globalConfig = {
     refresh_token_expirein: process.env.REFRESH_TOKEN_EXPIREIN,
     access_token_expirein: process.env.ACCESS_TOKEN_EXPIREIN,
 };
-
-export { globalConfig };

@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import { MailSenderSendEmailParm } from 'CommonTypes';
-import { globalConfig } from '@common';
+import GlobalConfig from '@GlobalConfig';
 
 const MailSender = {
     // 메일발송 함수
@@ -12,19 +12,19 @@ const MailSender = {
             secure: false,
             requireTLS: true,
             auth: {
-                user: globalConfig.gmail_username,
-                pass: globalConfig.gmail_password,
+                user: GlobalConfig.gmail_username,
+                pass: GlobalConfig.gmail_password,
             },
         });
 
         // 메일 옵션
         const mailOptions = {
-            from: `"NicePage Board Team" <${globalConfig.gmail_username}>`,
+            from: `"NicePage Board Team" <${GlobalConfig.gmail_username}>`,
             to: param.ToEmail, // 수신할 이메일
             subject: 'NicePage Board 이메일 인증을 해주세요.',
             text: param.EmailAuthCode,
             html: `<b>아래 링크를 클릭해서 이메일 인증을 완료해 주세요.</b><br /><br />
-            <a href="${globalConfig.hostname}/web/emailauth/${param.EmailAuthCode}">클릭.</a>
+            <a href="${GlobalConfig.hostname}/web/emailauth/${param.EmailAuthCode}">클릭.</a>
             `,
         };
         // 메일 발송
