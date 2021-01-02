@@ -1,0 +1,21 @@
+# Default
+/node_modules
+/build
+/public
+yarn-error.log
+/*.log
+/logs
+
+# environment config file
+cfg/*
+!cfg/sample.environment.env
+.env
+
+
+# storage file
+storage/*
+
+# Editor
+.vscode
+.DS_Store
+.idea

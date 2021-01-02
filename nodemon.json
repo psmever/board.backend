@@ -1,0 +1,10 @@
+{
+    "verbose": true,
+    "events": {
+        "start": "echo \"\\x1Bc\"",
+        "restart": "echo \"\\x1Bc\""
+    },
+    "env": {
+        "NODE_ENV": "development"
+    }
+}
