@@ -23,10 +23,6 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: true,
 			},
-			profile_website: {
-				type: Sequelize.STRING,
-				allowNull: true,
-			},
 			profile_bio: {
 				type: Sequelize.TEXT,
 			},
