@@ -17,18 +17,20 @@ import path from 'path';
 // };
 
 import { RestAfterMiddleware, RestBeforeAfterMiddleware, RestMiddleware } from '@src/middlewares';
-import { TestsRouter, SystemsRouter, AuthRouter, DefaultRouter } from '@src/routers';
+import { TestsRouter, SystemsRouter, AuthRouter, DefaultRouter, UserRouter } from '@src/routers';
 
 function addRouters(app: Application): void {
     const baseApiRoute = '/api';
     const baseWebRoute = '/web';
-    // const baseRouteVersion = '/v1';
+    const baseApiRouteVersion = 'v1';
 
     app.use(`${baseApiRoute}`, RestBeforeAfterMiddleware);
 
     app.use(`${baseApiRoute}/tests`, RestMiddleware, TestsRouter);
     app.use(`${baseApiRoute}/systems`, RestMiddleware, SystemsRouter);
     app.use(`${baseApiRoute}/auth`, RestMiddleware, AuthRouter);
+
+    app.use(`${baseApiRoute}/${baseApiRouteVersion}/user`, RestMiddleware, UserRouter);
 
     app.use(`${baseApiRoute}`, RestAfterMiddleware);
 

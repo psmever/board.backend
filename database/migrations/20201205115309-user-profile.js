@@ -19,11 +19,7 @@ module.exports = {
 				type: Sequelize.INTEGER,
 				allowNull: false,
 			},
-			profile_name: {
-				type: Sequelize.STRING,
-				allowNull: true,
-			},
-			profile_bio: {
+			profile_intro: {
 				type: Sequelize.TEXT,
 			},
 			profile_gender: {

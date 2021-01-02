@@ -4,9 +4,7 @@ import { sequelize } from '@src/instances/Sequelize';
 interface UserProfilesAttributes {
     id: number;
     user_id: number;
-    profile_name?: string | null;
-    profile_website?: string | null;
-    profile_bio?: string | null;
+    profile_intro?: string | null;
     profile_gender?: string | null;
 }
 
@@ -16,9 +14,7 @@ class UserProfiles extends Model<UserProfilesAttributes, UserProfilesCreationAtt
     implements UserProfilesAttributes {
     public id!: number;
     public user_id!: number;
-    public profile_name!: string | null;
-    public profile_website!: string | null;
-    public profile_bio!: string | null;
+    public profile_intro!: string | null;
     public profile_gender!: 'Y' | 'N';
 
     // timestamps!
@@ -38,15 +34,7 @@ UserProfiles.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        profile_name: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        profile_website: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        profile_bio: {
+        profile_intro: {
             type: DataTypes.TEXT,
         },
         profile_gender: {

@@ -21,6 +21,7 @@ const responseMessage = {
         defaultClientError: '잘못된 요청 입니다.',
         clientTypeNotFound: '클라이언트 정보가 존재 하지 않습니다.',
         serverError: '처리중 문제가 발생 했습니다.',
+        serverWorkingError: '서버 작업중입니다.',
         needlogin: '로그인이 필요한 서비스입니다.',
     },
     default: {
@@ -40,9 +41,14 @@ const responseMessage = {
             fail_refresh_token_access_token: '토큰 정보 조회를 할수 없습니다.',
             fail_refresh_token_user_id: '정상 적인 사용자만 진행 할수 있습니다.',
             login_fail_user_active: '로그인 할수 없는 사용자 입니다.',
+            get_user_info_error: '사용자 정보를 가지고오는데 실패 했습니다.',
         },
         success: {
             register: '회원 가입이 완료 되었습니다.',
+        },
+        validation: {
+            user_name: '사용자 이름을 입력해 주세요.',
+            profile_intro: '소개를 입력해 주세요.',
         },
     },
 };

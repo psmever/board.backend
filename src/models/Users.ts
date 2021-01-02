@@ -1,6 +1,7 @@
 import { Model, DataTypes, Optional, HasOneGetAssociationMixin, Association } from 'sequelize';
 import { sequelize } from '@src/instances/Sequelize';
 import Codes from '@src/models/Codes';
+import UserProfiles from '@src/models/UserProfiles';
 
 interface UsersAttributes {
     id: number;
@@ -30,11 +31,14 @@ class Users extends Model<UsersAttributes, UsersCreationAttributes> implements U
     public readonly updatedAt!: Date;
 
     public getUserLevel!: HasOneGetAssociationMixin<Codes>;
+    public getUserProfile!: HasOneGetAssociationMixin<UserProfiles>;
 
     public readonly userLevel?: Codes;
+    public readonly userProfile?: UserProfiles;
 
     public static associations: {
         userLevel: Association<Users, Codes>;
+        userProfile: Association<Users, UserProfiles>;
     };
 }
 
@@ -92,6 +96,12 @@ Users.hasOne(Codes, {
     sourceKey: 'user_level',
     foreignKey: 'code_id',
     as: 'userLevel',
+});
+
+Users.hasOne(UserProfiles, {
+    sourceKey: 'id',
+    foreignKey: 'user_id',
+    as: 'userProfile',
 });
 
 export default Users;
